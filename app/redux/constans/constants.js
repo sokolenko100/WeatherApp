@@ -1,2 +1,4 @@
 export const SET_TEMPERATURE_DATA = 'SET_TEMPERATURE_DATA';
+export const SET_DATA_WETHER = 'SET_DATA_WETHER';
+
 
