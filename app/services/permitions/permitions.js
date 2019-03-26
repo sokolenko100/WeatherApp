@@ -7,22 +7,22 @@ import {
 export default class PermissionForLocation
 {
 	static hasLocationPermission = async () => {
-    // if (Platform.OS === 'ios' ||
-    //     (Platform.OS === 'android' && Platform.Version < 23)) {
-    //   return true;
-    // }
+    let result = false;
 
+    if (Platform.OS === 'ios'){
+      result = true;
+    }
     const hasPermission = await PermissionsAndroid.check(
       PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION
     );
 
-    if (hasPermission) return true;
+    if (hasPermission) result = true;
 
     const status = await PermissionsAndroid.request(
       PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION
     );
 
-    if (status === PermissionsAndroid.RESULTS.GRANTED) return true;
+    if (status === PermissionsAndroid.RESULTS.GRANTED) result = true;
 
     if (status === PermissionsAndroid.RESULTS.DENIED) {
       ToastAndroid.show('Location permission denied by user.', ToastAndroid.LONG);
@@ -30,6 +30,6 @@ export default class PermissionForLocation
       ToastAndroid.show('Location permission revoked by user.', ToastAndroid.LONG);
     }
 
-    return true;
+    return result;
   }
 }
